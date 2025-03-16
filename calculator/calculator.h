@@ -3,24 +3,22 @@
 
 using Number = double;
 
-enum OperationTypes {
-	PLUS,
-	MINUS,
-	MULT,
-	POW,
-	DIVID,
-	EQUAL,
-	SET,
-	CLEAR,
-	SAVE,
-	READ,
-	UNKNOWN
+
+class Calculator {
+    Number result;
+    Number save_number;
+    bool is_save_number = false;
+
+public:
+    void Set(Number n);
+    Number GetNumber() const;
+    void Add(Number n);
+    void Sub(Number n);
+    void Div(Number n);
+    void Mul(Number n);
+    void Pow(Number n);
+    void Save();
+    void Load();
+    bool HasMem() const;
+    std::string GetNumberRepr() const;
 };
-
-const size_t ONE_CHAR_OPERATION_SIZE = 1;
-
-bool ReadNumber(Number&);
-bool RunCalculatorCycle();
-
-OperationTypes FindOperationType(const std::string&);
-bool IsTwoNumbersOperation(OperationTypes);

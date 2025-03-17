@@ -67,18 +67,27 @@ void MainWindow::on_pb_nine_clicked()
 
 void MainWindow::SetNumber(QString number)
 {
-    if(input_number_ == "0" && number != "."){
-        input_number_ = number;
-    }else{
-        input_number_ += number;
+    if(current_operation_ == OperationTypes::NO_OPERATION){
+        ui->l_formula->clear();
     }
+    input_number_ += number;
     active_number_= input_number_.toDouble();
     ui->l_result->setText(input_number_);
 }
 
 void MainWindow::on_pb_dot_clicked()
 {
-    SetNumber(".");
+    if(input_number_.count('.') > 0){
+        return;
+    }
+
+    if(input_number_.isEmpty()){
+        input_number_ = "0.";
+    }else{
+        input_number_ += ".";
+    }
+
+    ui->l_result->setText(input_number_);
 }
 
 void MainWindow::on_pb_pm_clicked()
@@ -90,8 +99,16 @@ void MainWindow::on_pb_pm_clicked()
 
 void MainWindow::on_pb_one_clear_clicked()
 {
+    if(input_number_.isEmpty()){
+        return;
+    }
     input_number_.chop(1);
-    active_number_ = input_number_.toDouble();
+    bool to_double_res = false;
+    active_number_ = input_number_.toDouble(&to_double_res);
+    if(!to_double_res){
+        active_number_ = 0.;
+    }
+
     ui->l_result->setText(input_number_);
 }
 
@@ -108,8 +125,8 @@ void MainWindow::on_pb_mr_clicked()
     }
 
     active_number_ = memory_cell_;
-    input_number_ = QString::number(active_number_);
-    ui->l_result->setText(input_number_);
+    input_number_.clear();
+    ui->l_result->setText(QString::number(active_number_));
 }
 
 void MainWindow::on_pb_ms_clicked()
@@ -160,7 +177,7 @@ void MainWindow::SetOperation(OperationTypes operation_type)
         calculator_.Set(active_number_);
     }
 
-    ui->l_formula->setText(input_number_ + GetOperationSign(operation_type));
+    ui->l_formula->setText(QString::number(calculator_.GetNumber()) + GetOperationSign(operation_type));
     current_operation_ = operation_type;
     input_number_.clear();
 }
@@ -216,8 +233,8 @@ void MainWindow::on_pb_equal_clicked()
     }
 
     active_number_ = calculator_.GetNumber();
-    input_number_ = QString::number(active_number_);
-    ui->l_result->setText(input_number_);
+    input_number_.clear();
+    ui->l_result->setText(QString::number(active_number_));
     current_operation_ = OperationTypes::NO_OPERATION;
 }
 

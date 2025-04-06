@@ -18,18 +18,34 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::SetControllerCallback(std::function<void(ControllerType controller)> cb){
+    if(!cb){
+        std::abort();
+    }
+
     controller_cb_ = cb;
 }
 
 void MainWindow::SetProcessOperationKeyCallback(std::function<void(Operation key)> cb){
+    if(!cb){
+        std::abort();
+    }
+
     operation_cb_ = cb;
 }
 
 void MainWindow::SetProcessControlKeyCallback(std::function<void(ControlKey key)> cb){
+    if(!cb){
+        std::abort();
+    }
+
     control_cb_ = cb;
 }
 
 void MainWindow::SetDigitKeyCallback(std::function<void(int key)> cb){
+    if(!cb){
+        std::abort();
+    }
+
     digit_cb_ = cb;
 }
 

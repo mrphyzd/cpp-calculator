@@ -1,20 +1,7 @@
 #pragma once
 
-//#include "calculator.h"
 #include "enums.h"
-
 #include <QMainWindow>
-
-// Реальзуйте класс главного окна.
-// enum OperationTypes{
-//     NO_OPERATION,
-//     ADDITION,
-//     SUBTRACTION,
-//     MULTIPLICATION,
-//     DIVISION,
-//     POWER
-// };
-
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -70,11 +57,6 @@ private slots:
     void on_pb_pow_clicked();
 
     void on_cmb_controller_currentIndexChanged(int index);
-
-private:
-    // void SetOperation(OperationTypes);
-    // QString GetOperationSign(OperationTypes);
-    // void SetNumber(QString);
 
 private:
     Ui::MainWindow* ui;

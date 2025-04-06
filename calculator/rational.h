@@ -20,27 +20,23 @@ public:
     //(+, -, *, /)
 public:
     Rational operator+(const Rational& r) const {
-        Rational tmp{ numerator_ * r.denominator_ + denominator_ * r.numerator_ , denominator_ * r.denominator_ };
-        tmp.Reduction();
-        return tmp;
+        Rational tmp;
+        return tmp += r;
     }
 
     Rational operator-(const Rational& r) const {
-        Rational tmp{ numerator_ * r.denominator_ - denominator_ * r.numerator_ , denominator_ * r.denominator_ };
-        tmp.Reduction();
-        return tmp;
+        Rational tmp;
+        return tmp -= r;
     }
 
     Rational operator*(const Rational& r) const {
-        Rational tmp{ numerator_ * r.numerator_ , denominator_ * r.denominator_ };
-        tmp.Reduction();
-        return tmp;
+        Rational tmp;
+        return tmp *= r;
     }
 
     Rational operator/(const Rational& r) const {
-        Rational tmp{ numerator_ * r.denominator_ , denominator_ * r.numerator_ };
-        tmp.Reduction();
-        return tmp;
+        Rational tmp;
+        return tmp /= r;
     }
 
     //(+=, -=, *=, /=)
@@ -72,6 +68,7 @@ public:
         Reduction();
         return *this;
     }
+
     //(=)
 public:
     Rational& operator=(const int val) {
